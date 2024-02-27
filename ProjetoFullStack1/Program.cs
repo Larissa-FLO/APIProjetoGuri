@@ -13,19 +13,17 @@ builder.Services.AddDbContext<projetoGuriContext>(
     x=>x.UseSqlServer(builder.Configuration.GetConnectionString("connection")));
 var app = builder.Build();
 
-//builder.Services.AddCors(
-//    app.UseCors(option =>
-//    {
-//        option.AllowAnyHeader();
-//        option.AllowAnyMethod();
-//        option.AllowAnyOrigin();
-//    }));
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors(option =>
+    {
+        option.AllowAnyHeader();
+        option.AllowAnyMethod();
+        option.AllowAnyOrigin();
+    });
 }
 
 app.UseHttpsRedirection();
